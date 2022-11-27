@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_app/widgets/user_transaction.dart';
+import './widgets/user_transaction.dart';
 
 void main() {
   runApp(MyApp());
