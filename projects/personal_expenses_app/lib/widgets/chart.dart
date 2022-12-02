@@ -42,8 +42,8 @@ class Chart extends StatelessWidget {
       child: Row(
         children: groupedTransactionValues.map((data) {
           return ChartBar(
-            data['day'],
-            data['amount'],
+            (data['day'] as String),
+            (data['amount'] as double),
             totalSpending == 0.0
                 ? 0.0
                 : (data['amount'] as double) / totalSpending,
