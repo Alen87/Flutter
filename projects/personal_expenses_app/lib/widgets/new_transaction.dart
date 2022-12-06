@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -80,7 +83,7 @@ class _NewTransactionState extends State<NewTransaction> {
               // onChanged: (val) => amountInput = val,
             ),
             Container(
-              height: 20,
+              height: 70,
               child: Row(
                 children: <Widget>[
                   Expanded(
@@ -90,19 +93,29 @@ class _NewTransactionState extends State<NewTransaction> {
                           : 'Picked Date:${DateFormat.yMd().format(_selectedDate)}',
                     ),
                   ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      textStyle:
-                          TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                    onPressed: _persentDatePicker,
-                    child: Text(
-                      'Chose date',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
+                  Platform.isIOS
+                      ? CupertinoButton(
+                          child: Text(
+                            'Chose date',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          onPressed: _persentDatePicker,
+                        )
+                      : TextButton(
+                          style: TextButton.styleFrom(
+                            textStyle: TextStyle(
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          onPressed: _persentDatePicker,
+                          child: Text(
+                            'Chose date',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
                 ],
               ),
             ),
