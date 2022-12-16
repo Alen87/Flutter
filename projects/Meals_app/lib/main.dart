@@ -22,7 +22,11 @@ class _MyAppState extends State<MyApp> {
     'vegetarian': false,
   };
 
-  void _setFilters(Map<String, bool> filterData) {}
+  void _setFilters(Map<String, bool> filterData) {
+    setState(() {
+      _filters = filterData;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
