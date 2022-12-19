@@ -17,7 +17,8 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridTile(
       footer: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
         child: GridTileBar(
           backgroundColor: Colors.black87,
           leading: IconButton(
