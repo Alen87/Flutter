@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -40,8 +41,7 @@ class Products with ChangeNotifier {
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
   ];
-
-  var _showFavoritesOnly = false;
+  // var _showFavoritesOnly = false;
 
   List<Product> get items {
     // if (_showFavoritesOnly) {
@@ -62,7 +62,7 @@ class Products with ChangeNotifier {
   //   _showFavoritesOnly = true;
   //   notifyListeners();
   // }
-  //
+
   // void showAll() {
   //   _showFavoritesOnly = false;
   //   notifyListeners();
@@ -71,7 +71,8 @@ class Products with ChangeNotifier {
   void addProduct(Product product) {
     final url = Uri.parse(
         'https://flutter-update-a32ef-default-rtdb.europe-west1.firebasedatabase.app/products.json');
-    http.post(
+    http
+        .post(
       url,
       body: json.encode({
         'title': product.title,
@@ -80,16 +81,19 @@ class Products with ChangeNotifier {
         'price': product.price,
         'isFavorite': product.isFavorite,
       }),
-    );
-    final newProduct = Product(
-        id: DateTime.now().toString(),
+    )
+        .then((response) {
+      final newProduct = Product(
         title: product.title,
         description: product.description,
         price: product.price,
-        imageUrl: product.imageUrl);
-    _items.add(newProduct);
-    //_items.insert(0, newProduct);  //  at the start of the list
-    notifyListeners();
+        imageUrl: product.imageUrl,
+        id: json.decode(response.body)['name'],
+      );
+      _items.add(newProduct);
+      // _items.insert(0, newProduct); // at the start of the list
+      notifyListeners();
+    });
   }
 
   void updateProduct(String id, Product newProduct) {
@@ -105,5 +109,14 @@ class Products with ChangeNotifier {
   void deleteProduct(String id) {
     _items.removeWhere((prod) => prod.id == id);
     notifyListeners();
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
