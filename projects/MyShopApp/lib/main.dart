@@ -13,6 +13,7 @@ import './screens/user_products_screen.dart';
 import './screens/edit_product_screen.dart';
 import './screens/auth_screen.dart';
 import './providers/auth.dart';
+import './screens/splash_screen.dart';
 
 void main() {
   HttpOverrides.global = new MyHttpOverrides();
@@ -57,7 +58,9 @@ class MyApp extends StatelessWidget {
                   future: auth.tryAutoLogin(),
                   builder: (ctx, authResultSnapshot) =>
                       authResultSnapshot.connectionState ==
-                      ConnectionState.waiting ? :  AuthScreen(),
+                              ConnectionState.waiting
+                          ? SplashScreen()
+                          : AuthScreen(),
                 ),
           routes: {
             ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
