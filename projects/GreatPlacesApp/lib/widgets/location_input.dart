@@ -16,6 +16,9 @@ class _LocationInputState extends State<LocationInput> {
           height: 170,
           width: double.infinity,
           alignment: Alignment.center,
+          decoration: BoxDecoration(
+            border: Border.all(width: 1, color: Colors.grey),
+          ),
           child: _previewImageUrl == null
               ? Text(
                   'No Location Chosen',
@@ -28,6 +31,7 @@ class _LocationInputState extends State<LocationInput> {
                 ),
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextButton.icon(
               icon: Icon(
@@ -38,6 +42,9 @@ class _LocationInputState extends State<LocationInput> {
                 backgroundColor: Theme.of(context).primaryColor,
               ),
               onPressed: () {},
+            ),
+            SizedBox(
+              width: 10,
             ),
             TextButton.icon(
               icon: Icon(
