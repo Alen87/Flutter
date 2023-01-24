@@ -1,9 +1,8 @@
-const MAPBOX_API_KEY =
-    'pk.eyJ1Ijoic3B1enZhMTk4NyIsImEiOiJjbGQ5ZnpiMWIwOGx2M3Bwa29jbG16OXp3In0.crWZsb8KNbJkd9bF463PZA';
+const GOOGLE_API_KEY = 'AIzaSyApuG_Aw9iNu6hhGIjsCmXInRI6DxaGrdE';
 
 class LocationHelper {
   static String generateLocationPreviewImage(
       {double latitude, double longitude}) {
-    return 'https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/$longitude,$latitude,14.25,0,60/300x300?access_token=$MAPBOX_API_KEY';
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=&$latitude,$longitude&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$latitude,$longitude&key=$GOOGLE_API_KEY';
   }
 }
