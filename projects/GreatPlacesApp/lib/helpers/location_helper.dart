@@ -12,7 +12,7 @@ class LocationHelper {
 
   static Future<String> getPlaceAddress(double lat, double lng) async {
     final params = {
-      'lat-lng': '$lat,$lng',
+      'latlng': '$lat,$lng',
       'key': googleApiKey,
     };
     final url = Uri.https(
